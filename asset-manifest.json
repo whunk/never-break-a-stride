@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/never-break-a-stride/static/css/main.c5fe041b.css",
-    "main.js": "/never-break-a-stride/static/js/main.8d7856c5.js",
+    "main.js": "/never-break-a-stride/static/js/main.d0117e8c.js",
     "static/js/488.2f45323c.chunk.js": "/never-break-a-stride/static/js/488.2f45323c.chunk.js",
     "index.html": "/never-break-a-stride/index.html",
     "main.c5fe041b.css.map": "/never-break-a-stride/static/css/main.c5fe041b.css.map",
-    "main.8d7856c5.js.map": "/never-break-a-stride/static/js/main.8d7856c5.js.map",
+    "main.d0117e8c.js.map": "/never-break-a-stride/static/js/main.d0117e8c.js.map",
     "488.2f45323c.chunk.js.map": "/never-break-a-stride/static/js/488.2f45323c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c5fe041b.css",
-    "static/js/main.8d7856c5.js"
+    "static/js/main.d0117e8c.js"
   ]
 }
