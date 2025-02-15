@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/never-break-a-stride/static/css/main.c5fe041b.css",
-    "main.js": "/never-break-a-stride/static/js/main.d0117e8c.js",
+    "main.css": "/never-break-a-stride/static/css/main.9e53b11d.css",
+    "main.js": "/never-break-a-stride/static/js/main.17305405.js",
     "static/js/488.2f45323c.chunk.js": "/never-break-a-stride/static/js/488.2f45323c.chunk.js",
     "index.html": "/never-break-a-stride/index.html",
-    "main.c5fe041b.css.map": "/never-break-a-stride/static/css/main.c5fe041b.css.map",
-    "main.d0117e8c.js.map": "/never-break-a-stride/static/js/main.d0117e8c.js.map",
+    "main.9e53b11d.css.map": "/never-break-a-stride/static/css/main.9e53b11d.css.map",
+    "main.17305405.js.map": "/never-break-a-stride/static/js/main.17305405.js.map",
     "488.2f45323c.chunk.js.map": "/never-break-a-stride/static/js/488.2f45323c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c5fe041b.css",
-    "static/js/main.d0117e8c.js"
+    "static/css/main.9e53b11d.css",
+    "static/js/main.17305405.js"
   ]
 }
