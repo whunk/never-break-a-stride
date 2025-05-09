@@ -7,7 +7,7 @@ function Speed() {
         Speed
     </h1>
     <h1>
-        3:45 km/h
+        5:00 min/km
     </h1>
     </div>
   );

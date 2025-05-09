@@ -1,11 +1,11 @@
 import './App.css';
-import Speed from './Components/Speed';
-import Distance from './Components/Distance';
-import StartReset from './Components/StartReset';
+import Speed from './Components/Speed.tsx';
+import Distance from './Components/Distance.tsx';
+import StartReset from './Components/StartReset.tsx';
 import React, { useState } from 'react';
 
 
-function App() {
+const App: React.FC = () => {
   const [started, setStartStop] = useState(false);
   const [reset, setReset] = useState(false);
 

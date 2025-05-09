@@ -7,7 +7,7 @@ const Stopwatch = ( {startStop, reset}) => {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [timerInterval, setTimerInterval] = useState(null);
+  const [timerInterval, setTimerInterval] = useState<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     !startStop ? stopStopwatch() : startStopwatch();
@@ -39,12 +39,12 @@ useEffect(() => {
   };
 
   const stopStopwatch = () => {
-    clearInterval(timerInterval);
+    timerInterval && clearInterval(timerInterval);
     setIsRunning(false);
   };
 
   const resetStopwatch = () => {
-    clearInterval(timerInterval);
+    timerInterval && clearInterval(timerInterval);
     setIsRunning(false);
     setSeconds(0);
     setMinutes(0);
@@ -56,7 +56,9 @@ useEffect(() => {
   };
 
   useEffect(() => {
-    return () => clearInterval(timerInterval); // Cleanup the interval on unmount
+    if(timerInterval !== null){
+      return () =>  clearInterval(timerInterval); // Cleanup the interval on unmount
+    }
   }, [timerInterval]);
 
   return (
