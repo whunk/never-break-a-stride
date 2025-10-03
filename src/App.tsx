@@ -24,12 +24,15 @@ const App: React.FC = () => {
   };
   return (
     <div className="App">
+
         <div className="SpaceAround">
          <button onClick={connectHeartRateMonitor}>Connect to Heart Rate Monitor</button>
         {heartRate !== null && <p>Heart Rate: {heartRate} BPM</p>}
+
         <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
         {treadmillData !== null && <p>Incline: {treadmillData.incline} %</p>}
       </div>
+      
       <div className="SpaceAround">
       <Distance distance={0}/>
       <Speed speed={treadmillData?.speed ?? 0}/>
