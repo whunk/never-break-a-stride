@@ -1,16 +1,20 @@
-import '../App.css';
+import React, { useEffect, useState } from "react";
 
-function Distance() {
-  return (
+const Distance: React.FC<{distance: number}> = ({distance}) => {
+  const [distanceM, setDistance] = useState<string>("0.00");
+  useEffect(() => {
+    if(distance > 0){
+      setDistance(`${distance} km`);
+    } else {
+      setDistance("-.--");
+    }
+  }, [distance]);
+ 
+  return(
     <div>
-    <h1>
-        Distance
-    </h1>
-    <h1>
-    2.54 km 
-</h1> 
-</div>
-  );
+      <h1>Distance</h1>
+      <h1>{distanceM}</h1>
+    </div>
+  )
 }
-
 export default Distance;
