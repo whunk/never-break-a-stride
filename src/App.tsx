@@ -6,8 +6,6 @@ import React, { useState } from 'react';
 import { useHeartRate } from './Hooks/HeartRateMonitor';
 import { useRunnSensor } from './Hooks/RunnSensor';
 
-
-
 const App: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [resetFlag, setResetFlag] = useState(false);
