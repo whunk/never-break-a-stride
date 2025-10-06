@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.6",
+    "core-js": "^3.45.1",
     "cra-template": "1.2.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "regenerator-runtime": "^0.14.1",
     "tailwindcss": "^4.1.6",
     "web-vitals": "^4.2.4"
   },

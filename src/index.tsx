@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from '../src/App';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime'; 
 
 const container = document.getElementById('root');
 

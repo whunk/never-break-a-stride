@@ -3,5 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-    base: '/never-break-a-stride/', // <-- this is critical
+    base: '/never-break-a-stride/',
+    build:{
+      target: 'es2015',
+    },
 });
