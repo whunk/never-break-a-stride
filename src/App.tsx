@@ -28,7 +28,7 @@ const App: React.FC = () => {
         {heartRate !== null && <p>Heart Rate: {heartRate} BPM</p>}
 
         <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
-        {treadmillData !== null && <p>Incline: {treadmillData.incline} %</p>}
+        {/*treadmillData !== null && <p>Incline: {treadmillData.incline} %</p>*/}
       </div>
       
       <div className="SpaceAround">

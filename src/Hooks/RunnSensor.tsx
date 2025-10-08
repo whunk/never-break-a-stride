@@ -28,7 +28,7 @@ export function useRunnSensor(){
 
         const server = await device.gatt?.connect();
 
-              const ftmsService = await server?.getPrimaryService('fitness_machine');
+    /*        const ftmsService = await server?.getPrimaryService('fitness_machine');
       const ftmsChar = await ftmsService?.getCharacteristic('00002acd-0000-1000-8000-00805f9b34fb');
 
       await ftmsChar?.startNotifications();
@@ -42,7 +42,7 @@ export function useRunnSensor(){
 
         setTreadmillData(prev => ({ ...prev, ...parsed }));
       });
-
+*/
        
       // Connect to Running Speed and Cadence service
       const rscService = await server?.getPrimaryService('running_speed_and_cadence');
@@ -70,7 +70,7 @@ export function useRunnSensor(){
   return { treadmillData, connectRunnSensor, device };
 }
 
-
+/*
 const parseTreadmillData = (value: DataView): TreadmillData => {
   let index = 0;
   const flags = value.getUint16(index, true);
@@ -121,7 +121,7 @@ if (flags & 0x0004) {
     //console.log('Parsed treadmill data:', result);
   return result;
 
-};
+};*/
 
 const parseRSCData = (value: DataView): TreadmillData => {
   let index = 0;
