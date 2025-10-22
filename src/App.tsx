@@ -1,10 +1,11 @@
 import './App.css';
-import Speed from './Components/Speed';
-import Distance from './Components/Distance';
-import StartReset from './Components/StartReset';
 import React, { useState } from 'react';
+import Distance from './Components/Distance';
+import Speed from './Components/Speed';
+import StartReset from './Components/StartReset';
 import { useHeartRate } from './Hooks/HeartRateMonitor';
 import { useRunnSensor } from './Hooks/RunnSensor';
+import { useDistance } from './Hooks/UseDistance';
 
 const App: React.FC = () => {
   const [started, setStarted] = useState(false);
@@ -20,6 +21,13 @@ const App: React.FC = () => {
     setResetFlag(prev => !prev);
     setStarted(false); 
   };
+
+  const distance = useDistance({
+    speed: treadmillData?.speed ?? 0,
+    started,
+    resetFlag,
+  });
+
   return (
     <div className="App">
 
@@ -28,11 +36,10 @@ const App: React.FC = () => {
         {heartRate !== null && <p>Heart Rate: {heartRate} BPM</p>}
 
         <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
-        {/*treadmillData !== null && <p>Incline: {treadmillData.incline} %</p>*/}
       </div>
       
       <div className="SpaceAround">
-      <Distance distance={0}/>
+      <Distance distance={distance}/>
       <Speed speed={treadmillData?.speed ?? 0}/>
       <StartReset started={started} resetFlag={resetFlag}/>
       </div>
