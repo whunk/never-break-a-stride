@@ -6,12 +6,25 @@ import StartReset from './Components/StartReset';
 import { useHeartRate } from './Hooks/HeartRateMonitor';
 import { useRunnSensor } from './Hooks/RunnSensor';
 import { useDistance } from './Hooks/UseDistance';
+import { useRunnSimulator } from './Hooks/UseRunnSimulator';
 
 const App: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [resetFlag, setResetFlag] = useState(false);
   const { heartRate, connectHeartRateMonitor } = useHeartRate();
-  const { treadmillData, connectRunnSensor } = useRunnSensor();
+  //const { treadmillData, connectRunnSensor } = useRunnSensor();
+  const [simulate, setSimulate] = useState(false);
+
+  let treadmillData;
+  let connectRunnSensor = () => {}; // dummy function for sim mode
+
+  if (simulate) {
+    treadmillData = useRunnSimulator(started);
+  } else {
+    const realSensor = useRunnSensor();
+    treadmillData = realSensor.treadmillData;
+    connectRunnSensor = realSensor.connectRunnSensor;
+  }
 
   const handleEvent = () => {
     setStarted(prev => !prev);
@@ -37,7 +50,6 @@ const App: React.FC = () => {
 
         <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
       </div>
-      
       <div className="SpaceAround">
       <Distance distance={distance}/>
       <Speed speed={treadmillData?.speed ?? 0}/>

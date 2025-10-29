@@ -15,7 +15,7 @@ const Speed: React.FC<{ speed: number }> = ({ speed }) => {
     const speedKph = (speed * 3.6).toFixed(1);
 
     return (
-      <div>
+      <div className="Container">
         <h1>Pace</h1>
         <h1>{speedKph} km/h</h1>
         <h1>{pace}</h1>

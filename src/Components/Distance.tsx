@@ -7,7 +7,7 @@ interface DistanceProps {
 export const Distance: React.FC<DistanceProps> = ({distance}) => {
   const km =  distance/ 1000; 
   return(
-    <div>
+    <div className="Container">
       <h1>Distance</h1>
       <h1>{km.toFixed(2)}</h1>
     </div>

@@ -41,7 +41,7 @@ const StartReset: React.FC<{ started: boolean; resetFlag: boolean }> = ({ starte
     };
 
     return (
-        <div className="StopWatch">
+        <div className="Container">
           <h1>{formatTime()}</h1>
         </div>
     );

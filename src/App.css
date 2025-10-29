@@ -30,6 +30,10 @@
     font-weight: 800;
 }
 
+.Container {
+  width: 100%;
+}
+
 h1 {
   font-size: 3.5em;
 }
