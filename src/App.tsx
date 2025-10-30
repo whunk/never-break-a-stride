@@ -42,22 +42,22 @@ const App: React.FC = () => {
   });
 
   return (
-    <div className="text-center grid items-center h-screen">
-      <div className="w-full inline-flex justify-around">
+    <div className="App">
+      <div className="SpaceAround">
         <button onClick={connectHeartRateMonitor}>Connect to Heart Rate Monitor</button>
         {heartRate !== null && <p>Heart Rate: {heartRate} BPM</p>}
 
         <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
       </div>
-      <div className="w-full inline-flex justify-around">
+      <div className="SpaceAround">
         <Distance distance={distance} />
         <Speed speed={treadmillData?.speed ?? 0} />
         <StartReset started={started} resetFlag={resetFlag} />
       </div>
 
-<div className="w-full inline-flex justify-around">
-        <button className="rounded-[15px] bg-transparent text-[whitesmoke] border-2 border-[#e7e7e7] w-[18rem] h-[6rem] text-[3em] font-bold" onClick={handleReset}>Reset</button>
-        <button className="rounded-[15px] bg-transparent text-[whitesmoke] border-2 border-[#e7e7e7] w-[18rem] h-[6rem] text-[3em] font-bold" onClick={handleEvent}>{!started ? "Start" : "Stop"}</button>
+<div className="SpaceAround">
+        <button className="Button" onClick={handleReset}>Reset</button>
+        <button className="Button" onClick={handleEvent}>{!started ? "Start" : "Stop"}</button>
       </div>
    </div>
   );
