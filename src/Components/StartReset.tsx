@@ -41,7 +41,7 @@ const StartReset: React.FC<{ started: boolean; resetFlag: boolean }> = ({ starte
     };
 
     return (
-        <div className="Container">
+        <div className="w-[17rem]">
           <h1>{formatTime()}</h1>
         </div>
     );

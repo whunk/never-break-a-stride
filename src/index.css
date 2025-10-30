@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
   margin: 0;  
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,10 +12,14 @@ body {
   width: 100vw;
   height: 100vh;
   color: whitesmoke;
-  background: linear-gradient(to bottom, #424242, #000000);
+  background: linear-gradient(to bottom, #646464, #000000);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1 {
+  font-size: 2.5em;
 }
