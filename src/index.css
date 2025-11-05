@@ -22,10 +22,15 @@ h1 {
   font-size: 2.5em;
 }
 
+h2 {
+  font-weight: 400;
+}
+
 .App {
   text-align: center;
   display: grid;
   align-items: center;
+  grid-template-rows: 10% 60% 30%;
   height: 100vh;
 }
 
@@ -43,7 +48,7 @@ h1 {
     width: 18rem;
     height: 6rem;
     font-size: 3em;
-    font-weight: 700;
+    font-weight: 400;
 }
 
 .Container {
@@ -56,4 +61,31 @@ h1 {
 
 h1 {
   font-size: 2.5em;
+  margin: 0;
+  font-weight: 400;
+}
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 20px;
+  border: none;
+  border-radius: 30px;
+  background-color: transparent;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.icon-button:hover {
+  background-color: #6b6b6b;
+}
+
+.icon-button svg {
+  flex-shrink: 0;
+}
+.InlineFlex {
+  display: inline-flex;
 }

@@ -7,6 +7,9 @@ import { useHeartRate } from './Hooks/HeartRateMonitor';
 import { useRunnSensor } from './Hooks/RunnSensor';
 import { useDistance } from './Hooks/UseDistance';
 import { useRunnSimulator } from './Hooks/UseRunnSimulator';
+import IconButton from './Components/IconButton';
+import { HRM } from './Svg/HRMIcon';
+import { BluetoothConnectIcon } from './Svg/BluetoothConnect';
 
 const App: React.FC = () => {
   const [started, setStarted] = useState(false);
@@ -44,10 +47,18 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <div className="SpaceAround">
-        <button onClick={connectHeartRateMonitor}>Connect to Heart Rate Monitor</button>
-        {heartRate !== null && <p>Heart Rate: {heartRate} BPM</p>}
+        <div className='InlineFlex'>
+          <IconButton
+            icon={HRM}
+            onClick={connectHeartRateMonitor}
+          />
+          {heartRate !== null && <h2>{heartRate} BPM</h2>}
+    </div>
 
-        <button onClick={connectRunnSensor}>Connect RunnSpeedSensor</button>
+        <IconButton
+        icon={BluetoothConnectIcon}
+        onClick={connectRunnSensor}
+        />
       </div>
       <div className="SpaceAround">
         <Distance distance={distance} />
