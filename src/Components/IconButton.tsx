@@ -2,7 +2,7 @@ import React from "react";
 
 interface IconButtonProps {
   label?: string;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>; // React component for SVG
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   onClick?: () => void;
   className?: string;
 }

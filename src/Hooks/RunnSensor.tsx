@@ -1,73 +1,73 @@
 import { useState } from "react";
 
 type TreadmillData = {
-  speed?: number;         // m/s
-  avgSpeed?: number;      // m/s
-  distance?: number;      // meters
-  incline?: number;       // percent
-  rampIncline?: number;   // percent
-  elevationGain?: number; // meters
-  cadence?: number;       // steps per minute
-  strideLength?: number;  // meters
+    speed?: number;         // m/s
+    avgSpeed?: number;      // m/s
+    distance?: number;      // meters
+    incline?: number;       // percent
+    rampIncline?: number;   // percent
+    elevationGain?: number; // meters
+    cadence?: number;       // steps per minute
+    strideLength?: number;  // meters
 };
 
-export function useRunnSensor(){
+export function useRunnSensor() {
     const [treadmillData, setTreadmillData] = useState<TreadmillData | null>(null);
     const [device, setDevice] = useState<BluetoothDevice | null>(null);
-    
-    async function connectRunnSensor(){
-    try {
-        const device = await navigator.bluetooth.requestDevice({
-          filters: [{ namePrefix: 'Runn' }],
-          optionalServices: ['fitness_machine',
-            'running_speed_and_cadence'
-          ]
-        });
 
-        setDevice(device);
+    async function connectRunnSensor() {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+                filters: [{ namePrefix: 'Runn' }],
+                optionalServices: ['fitness_machine',
+                    'running_speed_and_cadence'
+                ]
+            });
 
-        const server = await device.gatt?.connect();
+            setDevice(device);
 
-    /*        const ftmsService = await server?.getPrimaryService('fitness_machine');
-      const ftmsChar = await ftmsService?.getCharacteristic('00002acd-0000-1000-8000-00805f9b34fb');
+            const server = await device.gatt?.connect();
 
-      await ftmsChar?.startNotifications();
-      ftmsChar?.addEventListener('characteristicvaluechanged', (event) => {
-        const characteristic = event.target as BluetoothRemoteGATTCharacteristic;
-        const value = characteristic.value;
-        if (!value) return;
+            /*        const ftmsService = await server?.getPrimaryService('fitness_machine');
+              const ftmsChar = await ftmsService?.getCharacteristic('00002acd-0000-1000-8000-00805f9b34fb');
+        
+              await ftmsChar?.startNotifications();
+              ftmsChar?.addEventListener('characteristicvaluechanged', (event) => {
+                const characteristic = event.target as BluetoothRemoteGATTCharacteristic;
+                const value = characteristic.value;
+                if (!value) return;
+        
+                const parsed = parseTreadmillData(value);
+                //console.log("Parsed FTMS data:", parsed);
+        
+                setTreadmillData(prev => ({ ...prev, ...parsed }));
+              });
+        */
 
-        const parsed = parseTreadmillData(value);
-        //console.log("Parsed FTMS data:", parsed);
+            // Connect to Running Speed and Cadence service
+            const rscService = await server?.getPrimaryService('running_speed_and_cadence');
+            const rscChar = await rscService?.getCharacteristic('00002a53-0000-1000-8000-00805f9b34fb');
 
-        setTreadmillData(prev => ({ ...prev, ...parsed }));
-      });
-*/
-       
-      // Connect to Running Speed and Cadence service
-      const rscService = await server?.getPrimaryService('running_speed_and_cadence');
-      const rscChar = await rscService?.getCharacteristic('00002a53-0000-1000-8000-00805f9b34fb');
+            await rscChar?.startNotifications();
+            rscChar?.addEventListener('characteristicvaluechanged', (event) => {
+                const characteristic = event.target as BluetoothRemoteGATTCharacteristic;
+                const value = characteristic.value;
+                if (!value) return;
 
-      await rscChar?.startNotifications();
-      rscChar?.addEventListener('characteristicvaluechanged', (event) => {
-        const characteristic = event.target as BluetoothRemoteGATTCharacteristic;
-        const value = characteristic.value;
-        if (!value) return;
+                const parsed = parseRSCData(value);
+                //console.log("Parsed RSC data:", parsed);
 
-        const parsed = parseRSCData(value);
-        //console.log("Parsed RSC data:", parsed);
+                setTreadmillData(prev => ({ ...prev, ...parsed }));
+            });
 
-        setTreadmillData(prev => ({ ...prev, ...parsed }));
-      });
-
-      console.log("Selected device:", device.name);
-      return device;
-    } catch (error) {
-      console.error("Device request failed:", error);
+            console.log("Selected device:", device.name);
+            return device;
+        } catch (error) {
+            console.error("Device request failed:", error);
+        }
     }
-  }
 
-  return { treadmillData, connectRunnSensor, device };
+    return { treadmillData, connectRunnSensor, device };
 }
 
 /*
@@ -124,28 +124,28 @@ if (flags & 0x0004) {
 };*/
 
 const parseRSCData = (value: DataView): TreadmillData => {
-  let index = 0;
-  const flags = value.getUint8(index++);
-//const bytes = Array.from(new Uint8Array(value.buffer));
+    let index = 0;
+    const flags = value.getUint8(index++);
+    //const bytes = Array.from(new Uint8Array(value.buffer));
 
 
-  const result: TreadmillData = {};
+    const result: TreadmillData = {};
 
-  result.speed = value.getUint16(index, true) / 256;
-  index += 2;
-
-  result.cadence = value.getUint8(index++);
-
-  if (flags & 0x01) {
-    result.strideLength = value.getUint16(index, true) / 100;
+    result.speed = value.getUint16(index, true) / 256;
     index += 2;
-  }
 
-  if (flags & 0x02) {
-    result.distance = value.getUint32(index, true);
-    index += 4;
-  }
+    result.cadence = value.getUint8(index++);
 
-  console.log("Parsed RSC data:", result);
-  return result;
+    if (flags & 0x01) {
+        result.strideLength = value.getUint16(index, true) / 100;
+        index += 2;
+    }
+
+    if (flags & 0x02) {
+        result.distance = value.getUint32(index, true);
+        index += 4;
+    }
+
+    console.log("Parsed RSC data:", result);
+    return result;
 };

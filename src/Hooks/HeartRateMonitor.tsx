@@ -2,12 +2,12 @@ import { useState } from "react";
 
 export function useHeartRate() {
     const [heartRate, setHeartRate] = useState<number | null>(null);
-    const [device, setDevice ] = useState<BluetoothDevice | null>(null);
+    const [device, setDevice] = useState<BluetoothDevice | null>(null);
 
     async function connectHeartRateMonitor() {
         try {
             const device = await navigator.bluetooth.requestDevice({
-                filters: [{services: ['heart_rate']}]
+                filters: [{ services: ['heart_rate'] }]
             });
 
             setDevice(device);

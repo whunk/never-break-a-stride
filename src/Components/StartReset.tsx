@@ -1,34 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 const StartReset: React.FC<{ started: boolean; resetFlag: boolean }> = ({ started, resetFlag }) => {
-  const [time, setTime] = useState(0); // time in seconds
-  const intervalRef = useRef<number | null>(null);
-  const prevResetRef = useRef(resetFlag);
+    const [time, setTime] = useState(0); // time in seconds
+    const intervalRef = useRef<number | null>(null);
+    const prevResetRef = useRef(resetFlag);
 
-  // Start/stop the timer
-  useEffect(() => {
-    if (started) {
-        intervalRef.current = setInterval(() => {
-          setTime(prev => prev + 1);
-        }, 1000);
-    } else {
-        if (intervalRef.current !== null) {
-              clearInterval(intervalRef.current);
+    // Start/stop the timer
+    useEffect(() => {
+        if (started) {
+            intervalRef.current = setInterval(() => {
+                setTime(prev => prev + 1);
+            }, 1000);
+        } else {
+            if (intervalRef.current !== null) {
+                clearInterval(intervalRef.current);
+            }
         }
-    }
 
-    return () => {
-        if (intervalRef.current !== null) {
-          clearInterval(intervalRef.current);
-        }
-    } // cleanup
-  }, [started]);
+        return () => {
+            if (intervalRef.current !== null) {
+                clearInterval(intervalRef.current);
+            }
+        } // cleanup
+    }, [started]);
 
-  // Reset logic
+    // Reset logic
     useEffect(() => {
         if (prevResetRef.current !== resetFlag) {
-          setTime(0);
-          prevResetRef.current = resetFlag;
+            setTime(0);
+            prevResetRef.current = resetFlag;
         }
     }, [resetFlag]);
 
@@ -42,7 +42,7 @@ const StartReset: React.FC<{ started: boolean; resetFlag: boolean }> = ({ starte
 
     return (
         <div className="Container">
-          <h1>{formatTime()}</h1>
+            <h1>{formatTime()}</h1>
         </div>
     );
 };

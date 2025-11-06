@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from '../src/App';
 import 'core-js/stable';
-import 'regenerator-runtime/runtime'; 
+import 'regenerator-runtime/runtime';
 
 const container = document.getElementById('root');
 
 if (!container) {
-  throw new Error("Root container not found. Ensure there's a div with id='root' in your HTML.");
+    throw new Error("Root container not found. Ensure there's a div with id='root' in your HTML.");
 }
 
 const root = ReactDOM.createRoot(container as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 );

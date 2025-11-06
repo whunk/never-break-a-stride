@@ -23,24 +23,24 @@ export function useDistance({ speed, started, resetFlag }: UseDistanceOptions) {
 
     useEffect(() => {
 
-    const interval = setInterval(() => {
-        if (!startedRef.current) return;
-    
-        const now = Date.now();
-        if (lastUpdateRef.current !== null) {
-            const deltaSeconds = (now - lastUpdateRef.current) / 1000;
-            setDistance(prev => prev + speedRef.current * deltaSeconds);
-        }
+        const interval = setInterval(() => {
+            if (!startedRef.current) return;
 
-        lastUpdateRef.current = now;
-    }, 1000);
+            const now = Date.now();
+            if (lastUpdateRef.current !== null) {
+                const deltaSeconds = (now - lastUpdateRef.current) / 1000;
+                setDistance(prev => prev + speedRef.current * deltaSeconds);
+            }
 
-    return () => clearInterval(interval);
+            lastUpdateRef.current = now;
+        }, 1000);
+
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
-    setDistance(0);
-    lastUpdateRef.current = null;
+        setDistance(0);
+        lastUpdateRef.current = null;
     }, [resetFlag]);
 
     return distance;
