@@ -8,12 +8,11 @@ const App: React.FC = () => {
     const [started, setStarted] = useState(false);
     const [resetFlag, setResetFlag] = useState(false);
     const {heartRate, connectHeartRateMonitor } = useHeartRate();
-    const [simulate, setSimulate] = useState(true);
+    const [simulate, setSimulate] = useState(false);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const [workoutStarted, setWorkoutStarted] = useState<boolean>(false);
     const [customWorkout, setCustomWorkout] = useState<Workout | null>(null);
     const [showBuilder, setShowBuilder] = useState(false);
-
 
     let treadmillData;
     let connectRunnSensor = () => { }; // dummy function for sim mode

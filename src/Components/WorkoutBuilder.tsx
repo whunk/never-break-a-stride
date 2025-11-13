@@ -54,6 +54,9 @@ const WorkoutBuilder: React.FC<WorkoutBuilderProps> = ({ onWorkoutCreate }) => {
                         min={1}
                         value={repeats}
                         onChange={(e) => setRepeats(Number(e.target.value))}
+                        onBlur={() => {
+                            if( Number(repeats) < 1) setRepeats(1);
+                        }}
                     />
                 </label>
             </div>
