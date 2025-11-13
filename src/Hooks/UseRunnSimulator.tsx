@@ -11,7 +11,7 @@ export function useRunnSimulator(started: boolean) {
         if (!started) return;
 
         let distance = 0;
-        let speed = 2.5;
+        let speed = 4.5;
         let lastTime = Date.now();
 
         const interval = setInterval(() => {
@@ -19,7 +19,6 @@ export function useRunnSimulator(started: boolean) {
             const deltaTime = (now - lastTime) / 1000;
             lastTime = now;
 
-            //speed += (Math.random() - 0.5) * 0.1;
             speed = Math.max(0, Math.min(4, speed));
 
             distance += speed * deltaTime;

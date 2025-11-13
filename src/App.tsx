@@ -1,23 +1,43 @@
-import React, { useState } from 'react';
-import Distance from './Components/Distance';
-import Speed from './Components/Speed';
-import StartReset from './Components/StartReset';
-import { useHeartRate } from './Hooks/HeartRateMonitor';
-import { useRunnSensor } from './Hooks/RunnSensor';
-import { useDistance } from './Hooks/UseDistance';
-import { useRunnSimulator } from './Hooks/UseRunnSimulator';
-import IconButton from './Components/IconButton';
-import { HRM } from './Svg/HRMIcon';
-import { BluetoothConnectIcon } from './Svg/BluetoothConnect';
+import React, { useState, useEffect } from 'react';
+import { Workout } from './types/types';
+import { Distance, Speed, WorkoutRunner, WorkoutBuilder, StartReset, IconButton, Modal} from '@/Components';
+import { useHeartRate, useDistance, useRunnSensor, useRunnSimulator } from '@/Hooks';
+import { HRM, ArrowRightIcon, BluetoothConnectIcon, BuildWorkoutIcon} from '@/Svg';
 
 const App: React.FC = () => {
     const [started, setStarted] = useState(false);
     const [resetFlag, setResetFlag] = useState(false);
-    const { heartRate, connectHeartRateMonitor } = useHeartRate();
-    const [simulate, setSimulate] = useState(false);
+    const {heartRate, connectHeartRateMonitor } = useHeartRate();
+    const [simulate, setSimulate] = useState(true);
+    const [elapsedTime, setElapsedTime] = useState<number>(0);
+    const [workoutStarted, setWorkoutStarted] = useState<boolean>(false);
+    const [customWorkout, setCustomWorkout] = useState<Workout | null>(null);
+    const [showBuilder, setShowBuilder] = useState(false);
+
 
     let treadmillData;
     let connectRunnSensor = () => { }; // dummy function for sim mode
+
+    useEffect(() => {
+        let interval: number | null = null;
+
+        if (started) {
+            interval = window.setInterval(() => {
+                setElapsedTime((t) => t + 1);
+            }, 1000);
+        } else if (interval) {
+            clearInterval(interval);
+        }
+
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [started]);
+
+    useEffect(() => {
+        setElapsedTime(0);
+    }, [resetFlag]);
+
 
     if (simulate) {
         treadmillData = useRunnSimulator(started);
@@ -57,11 +77,57 @@ const App: React.FC = () => {
                     icon={BluetoothConnectIcon}
                     onClick={connectRunnSensor}
                 />
+                <IconButton icon={BuildWorkoutIcon}
+                    onClick={() => setShowBuilder(true)}
+                />
+            </div>
+            <div>
+                <div className="SpaceAround">
+                    <div style={{ display: "flex", gap: "2rem" }}>
+                        <Modal
+                            isOpen={showBuilder}
+                            onClose={() => setShowBuilder(false)}
+                            title="Build Your Workout"
+                        >
+                            <WorkoutBuilder
+                                onWorkoutCreate={(w) => {
+                                    console.log("Workout created:", w);
+                                    setCustomWorkout(w);
+                                    setShowBuilder(false);
+                                }}
+                            />
+                        </Modal>
+
+                        {customWorkout && !workoutStarted && (
+                            <IconButton
+                                icon={ArrowRightIcon}
+                                onClick={() => setWorkoutStarted(true)}
+                            />
+                        )}
+
+                        {customWorkout && workoutStarted && (
+                            <WorkoutRunner
+                                workout={customWorkout}
+                                distance={distance / 1000}
+                                elapsedTime={elapsedTime}
+                                onWorkoutComplete={() => {
+                                    alert("Workout complete!");
+                                    setWorkoutStarted(false);
+                                    setCustomWorkout(null);
+                                }}
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
             <div className="SpaceAround">
                 <Distance distance={distance} />
                 <Speed speed={treadmillData?.speed ?? 0} />
-                <StartReset started={started} resetFlag={resetFlag} />
+                <StartReset
+                    started={started}
+                    resetFlag={resetFlag}
+                    time={elapsedTime}
+                />
             </div>
 
             <div className="SpaceAround">
