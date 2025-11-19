@@ -12,7 +12,7 @@ export const CrossIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
         height={30}
         {...props}
     >
-        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
 );
 

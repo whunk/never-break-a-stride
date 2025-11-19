@@ -82,7 +82,7 @@ const App: React.FC = () => {
             </div>
             <div>
                 <div className="SpaceAround">
-                    <div style={{ display: "flex", gap: "2rem" }}>
+                    <div>
                         <Modal
                             isOpen={showBuilder}
                             onClose={() => setShowBuilder(false)}

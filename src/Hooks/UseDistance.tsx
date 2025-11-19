@@ -22,21 +22,19 @@ export function useDistance({ speed, started, resetFlag }: UseDistanceOptions) {
     }, [started]);
 
     useEffect(() => {
+        if (!started) return;
+
+        lastUpdateRef.current = Date.now();
 
         const interval = setInterval(() => {
-            if (!startedRef.current) return;
-
             const now = Date.now();
-            if (lastUpdateRef.current !== null) {
-                const deltaSeconds = (now - lastUpdateRef.current) / 1000;
-                setDistance(prev => prev + speedRef.current * deltaSeconds);
-            }
-
+            const delta = (now - lastUpdateRef.current!) / 1000;
             lastUpdateRef.current = now;
+            setDistance(prev => prev + delta * speedRef.current);
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [started]);
 
     useEffect(() => {
         setDistance(0);

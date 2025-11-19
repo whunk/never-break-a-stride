@@ -44,7 +44,7 @@ const WorkoutBuilder: React.FC<WorkoutBuilderProps> = ({ onWorkoutCreate }) => {
     };
 
     return (
-        <div style={{  color: "#222" }}>
+        <div>
             <div>
                 <label>
                     Repeats:
@@ -63,7 +63,7 @@ const WorkoutBuilder: React.FC<WorkoutBuilderProps> = ({ onWorkoutCreate }) => {
 
             <h4>Steps</h4>
             {steps.map((step, index) => (
-                <div key={index} className="step-container">
+                <div key={index} className="mb-2 text-[#555] inline-flex justify-center h-12">
                     <select className="InputStyle"
                         value={step.type}
                         onChange={(e) => updateStep(index, "type", e.target.value)}
@@ -89,7 +89,7 @@ const WorkoutBuilder: React.FC<WorkoutBuilderProps> = ({ onWorkoutCreate }) => {
                     />
 
                     <IconButton
-                        className="modal-icon-button"
+                        className="text-[#555] p-3"
                         icon={CrossIcon}
                         onClick={() => removeStep(index)}
                     />
@@ -97,13 +97,13 @@ const WorkoutBuilder: React.FC<WorkoutBuilderProps> = ({ onWorkoutCreate }) => {
             ))}
 
             <IconButton
-                className="modal-icon-button"
+                className="text-[#555] p-3"
                 icon={PlusIcon}
                 onClick={addStep}
             />
             <hr />
             <IconButton
-                className="modal-icon-button"
+                className="text-[#555] p-3"
                 icon={ArrowRightIcon}
                 onClick={handleCreateWorkout}
             />
